@@ -1,4 +1,4 @@
-import { Component } from "react";
+import {Phonebook} from './Phonebook/Phonebook'
 
 export const App = () => {
   return (
@@ -8,60 +8,18 @@ export const App = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'column',
         fontSize: 40,
-        color: '#010101'
+        color: '#010101',
+        listStyleType: 'none'
       }}
     >
       <Phonebook />
-      <Contacts />
+      
     </div>
   );
 };
 
-class Phonebook extends Component {
-  
-  state = {
-    contacts: [],
-    name: ''
-  }
 
-  handleChange(){
-
-  }
-
-  handleSubmit = (evt)=>{
-    console.log(evt.target[0].value);
-    this.setState({name: evt.target[0].value});
-  }
-
-  render(){
-    return(
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="User" />
-       
-        <button type="submit">Add contact</button>
-      </form>
-    )
-   } 
-  }
-
-  class Contacts extends Component {
-   
-    handleChange(){
-  
-    }
-  
-    handleSubmit(){
-  
-    }
-  
-    render(){
-      return(
-        <ul>
-          <li>++++</li>
-        </ul>
-        
-      )
-     } 
-    }
+ 
   
