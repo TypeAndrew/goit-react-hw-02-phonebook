@@ -46,7 +46,6 @@ export class Phonebook extends Component {
 
   render() {
     
-    const { name,number } = this.state;
     return (
       <>
         <h1>Phonebook</h1>
