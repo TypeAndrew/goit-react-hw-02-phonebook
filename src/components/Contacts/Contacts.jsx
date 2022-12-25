@@ -1,21 +1,21 @@
-import { Component } from "react"; 
+import { nanoid } from 'nanoid'
 
-export class Contacts extends Component {
+export function Contacts(props)  {
    
-    
-    render(){
+      const { contacts, filter, onDelete } = props;
       return (
         <>
-        <ul>
-          {
-              this.props.contacts.map(element =>
-                  element.name.toLowerCase().includes(this.props.filter.toLowerCase()) &&
-                
-              <li key={element.name}><div>{element.name}</div><div> {element.number}</div><button onClick={this.props.onDelete} id={ element.name} type="button" >delete </button></li>
-          )
-          }
-        </ul>
+          <ul>
+            {
+                contacts.map(element =>
+                    element.name.toLowerCase().includes(filter.toLowerCase()) &&
+                  
+                  <li key={nanoid()}><div>{element.name}</div><div> {element.number}</div>
+                  <button onClick={onDelete} id={element.name} type="button" >delete </button></li>
+            )
+            }
+          </ul>
         </>
       )
-     } 
+     
     }

@@ -1,13 +1,10 @@
-import { Component } from "react";
 
-export class Filter extends Component {
-  
-  render() {
-
-    return (
+export function Filter(props)  {
+    const { handleFilter } = props; 
     
+    return (
         <label> Filter
-          <input onChange={this.props.handleFilter}
+          <input onChange={handleFilter}
           type="text"
           name="filter"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -16,5 +13,5 @@ export class Filter extends Component {
         </label>
    
     )
-   } 
+    
   } 
