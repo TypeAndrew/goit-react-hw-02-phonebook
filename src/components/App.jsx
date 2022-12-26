@@ -12,44 +12,45 @@ export class App extends Component {
     {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
   ],
-    filter: '',
-    name: '',
-    number: ''
+    filter: ''   
   }
 
   handleFilter= (evt) => {
-      this.setState( {filter: evt.target.value }); 
-   }
-
+      
+    this.setState({ filter: evt.target.value });
+    this.getFilterValueOn();
+  }
+  
   handleDelete = (evt) => {
     
     this.setState(prevState => {
-      const newContacts = this.state.contacts.filter(el => el.name !== evt.target.id);
+      const newContacts = prevState.contacts.filter(el => el.name !== evt.target.id);
       return { contacts: newContacts };
     });  
    }
 
-  handleChange = (evt) => {
-    
-    const {name,value } = evt.target;
-      this.setState({[name] : value });  
-  }
-
   handleSubmit = (evt) => {
+    
     evt.preventDefault();
-    const form = evt.currentTarget;
-    const user = form.elements.name.value;
-    const number = form.elements.number.value;
-   
-      const userExist = this.state.contacts.find(element => element.name === user);
-      if (userExist !== undefined) {
-          alert(`The ${user} is already in contacts`);
-     } else {
+    //const { name, number } = this.state;
+    const name = evt.currentTarget.elements.name.value;
+    const number = evt.currentTarget.elements.number.value;
+
+    const userExist = this.state.contacts.find(element => element.name === name);
+
+    if (userExist !== undefined) {
+        alert(`The ${name} is already in contacts`);
+    } else {
         this.setState({ name: '' , number: ''});
-        this.setState({ contacts: [...this.state.contacts, { name: user, number: number }] });
+        this.setState({ contacts: [...this.state.contacts, { name: name, number: number }] });
     }
   }
 
+  getFilterValueOn = () => {
+    
+   return this.state.contacts;
+  }
+    
   render() {
     return (
       <div
@@ -66,12 +67,15 @@ export class App extends Component {
       >
       
         <h1>Phonebook</h1>
-        <ContactForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} state={this.state} />
+        <ContactForm  handleSubmit={this.handleSubmit} />
         <h2>Contacts</h2>
-        <Filter handleFilter={this.handleFilter} />
-        <Contacts contacts={this.state.contacts} onDelete={this.handleDelete}
-          filter={this.state.filter} name={this.state.name} number={this.state.number} />
-      
+        <Filter handleFilter={this.handleFilter} filter={this.state.filter} />
+        <ul>
+        {this.state.contacts.map(element =>
+          element.name.toLowerCase().includes(this.state.filter.toLowerCase()) &&
+          < Contacts element={element} onDelete={this.handleDelete}
+           />)}
+        </ul>
       
       </div>
     );

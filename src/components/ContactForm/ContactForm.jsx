@@ -1,19 +1,33 @@
 import { Component } from "react";
 
 export class ContactForm extends Component {
-  
-    render() {
     
-        const { name, number } = this.props.state;
+    state = {
+        name: '',
+        number: ''
+    }
+    
+    handleChange = (evt) => {
+    
+        const {name,value } = evt.target;
+        this.setState({[name] : value });  
+    }
+
+    
+
+    render() {
+        const { name, number } = this.state;
+        const { handleSubmit } = this.props;
+        
         return (
             <>
         
-                <form onSubmit={this.props.handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div>
                         <label>Name</label>
             
                
-                        <input onChange={this.props.handleChange}
+                        <input onChange={this.handleChange}
                   
                             type="text"
                             name="name"
@@ -27,7 +41,7 @@ export class ContactForm extends Component {
             
                     <div>
                         <label>Phone</label>
-                        <input onChange={this.props.handleChange}
+                        <input onChange={this.handleChange}
                 
                             type="tel"
                             name="number"
