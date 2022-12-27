@@ -15,10 +15,12 @@ export class ContactForm extends Component {
     }
 
     onSubmit = (evt) =>{
-        //const { name, number } = this.state;
-        evt.preventDefault();
+        if (evt !==undefined) {
+            evt.preventDefault();
+        }
+        const { name, number } = this.state;
         const { handleSubmit } = this.props;
-        handleSubmit(this.state.name,this.state.number);
+        handleSubmit(name,number);
         this.setState({ name: '' , number: ''});
     }
 

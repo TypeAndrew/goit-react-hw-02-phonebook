@@ -30,17 +30,19 @@ export class App extends Component {
     });  
    }
 
-  handleSubmit = (name, number) => {
+  handleSubmit = (name='', number='') => {
     
    
     const id = nanoid();
+    
     const userExist = this.state.contacts.find(element => element.name === name);
 
     if (userExist !== undefined) {
         alert(`The ${name} is already in contacts`);
     } else {
         
-      this.setState({ contacts: [...this.state.contacts, {id: id, name: name, number: number }] });
+      
+        this.setState({ contacts: [...this.state.contacts, {id: id, name: name, number: number }] });
        
     }
  
