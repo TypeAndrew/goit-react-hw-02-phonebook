@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 
 export function Filter(props)  {
     const { handleFilter } = props; 
     
     return (
-        <label> Filter
+      <label > Filter
           <input onChange={handleFilter}
           type="text"
           name="filter"
@@ -15,3 +16,7 @@ export function Filter(props)  {
     )
     
   } 
+
+  Filter.propTypes = {
+    handleSubmit: PropTypes.func,
+};

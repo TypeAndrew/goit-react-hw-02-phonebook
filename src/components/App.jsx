@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Contacts } from './Contacts/Contacts';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
+import { nanoid } from 'nanoid'
 
 export class App extends Component {
   
@@ -33,6 +34,7 @@ export class App extends Component {
     
     evt.preventDefault();
     //const { name, number } = this.state;
+    const id = nanoid();
     const name = evt.currentTarget.elements.name.value;
     const number = evt.currentTarget.elements.number.value;
 
@@ -42,13 +44,13 @@ export class App extends Component {
         alert(`The ${name} is already in contacts`);
     } else {
         this.setState({ name: '' , number: ''});
-        this.setState({ contacts: [...this.state.contacts, { name: name, number: number }] });
+        this.setState({ contacts: [...this.state.contacts, {id: id, name: name, number: number }] });
     }
   }
 
   getFilterValueOn = () => {
     
-   return this.state.contacts;
+   //return this.state.contacts;
   }
     
   render() {
@@ -65,7 +67,7 @@ export class App extends Component {
           listStyleType: 'none'
         }}
       >
-      
+        <>
         <h1>Phonebook</h1>
         <ContactForm  handleSubmit={this.handleSubmit} />
         <h2>Contacts</h2>
@@ -73,10 +75,10 @@ export class App extends Component {
         <ul>
         {this.state.contacts.map(element =>
           element.name.toLowerCase().includes(this.state.filter.toLowerCase()) &&
-          < Contacts element={element} onDelete={this.handleDelete}
+          < Contacts key={element.name} element={element} onDelete={this.handleDelete}
            />)}
         </ul>
-      
+        </>
       </div>
     );
   }
