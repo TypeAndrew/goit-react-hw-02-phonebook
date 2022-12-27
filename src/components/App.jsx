@@ -50,7 +50,7 @@ export class App extends Component {
 
   getFilterValueOn = () => {
     
-   //return this.state.contacts;
+   return this.state.contacts;
   }
     
   render() {
@@ -69,7 +69,7 @@ export class App extends Component {
       >
         <>
         <h1>Phonebook</h1>
-        <ContactForm  handleSubmit={this.handleSubmit} />
+        <ContactForm  handleSubmit={this.handleSubmit} state={this.state} />
         <h2>Contacts</h2>
         <Filter handleFilter={this.handleFilter} filter={this.state.filter} />
         <ul>
