@@ -30,22 +30,20 @@ export class App extends Component {
     });  
    }
 
-  handleSubmit = (evt) => {
+  handleSubmit = (name, number) => {
     
-    evt.preventDefault();
-    //const { name, number } = this.state;
+   
     const id = nanoid();
-    const name = evt.currentTarget.elements.name.value;
-    const number = evt.currentTarget.elements.number.value;
-
     const userExist = this.state.contacts.find(element => element.name === name);
 
     if (userExist !== undefined) {
         alert(`The ${name} is already in contacts`);
     } else {
-        this.setState({ name: '' , number: ''});
-        this.setState({ contacts: [...this.state.contacts, {id: id, name: name, number: number }] });
+        
+      this.setState({ contacts: [...this.state.contacts, {id: id, name: name, number: number }] });
+       
     }
+ 
   }
 
   getFilterValueOn = () => {
@@ -69,7 +67,7 @@ export class App extends Component {
       >
         <>
         <h1>Phonebook</h1>
-        <ContactForm  handleSubmit={this.handleSubmit} state={this.state} />
+        <ContactForm  handleSubmit={this.handleSubmit} />
         <h2>Contacts</h2>
         <Filter handleFilter={this.handleFilter} filter={this.state.filter} />
         <ul>
