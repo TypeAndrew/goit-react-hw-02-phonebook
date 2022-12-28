@@ -19,7 +19,7 @@ export class App extends Component {
   handleFilter= (evt) => {
       
     this.setState({ filter: evt.target.value });
-    this.getFilterValueOn();
+    
   }
   
   handleDelete = (evt) => {
@@ -48,9 +48,9 @@ export class App extends Component {
  
   }
 
-  getFilterValueOn = () => {
+  getFilterValueOn = (element) => {
     
-   return this.state.contacts;
+   return element.name.toLowerCase().includes(this.state.filter.toLowerCase());
   }
     
   render() {
@@ -74,7 +74,7 @@ export class App extends Component {
         <Filter handleFilter={this.handleFilter} filter={this.state.filter} />
         <ul>
         {this.state.contacts.map(element =>
-          element.name.toLowerCase().includes(this.state.filter.toLowerCase()) &&
+           this.getFilterValueOn(element) &&
           < Contacts key={element.name} element={element} onDelete={this.handleDelete}
            />)}
         </ul>

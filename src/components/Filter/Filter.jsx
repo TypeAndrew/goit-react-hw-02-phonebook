@@ -20,4 +20,5 @@ export function Filter(props)  {
 
   Filter.propTypes = {
     handleSubmit: PropTypes.func,
+    filter: PropTypes.string,
 };
