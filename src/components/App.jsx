@@ -30,7 +30,7 @@ export class App extends Component {
     });  
    }
 
-  handleSubmit = (name='', number='') => {
+  handleSubmit = (name, number) => {
     
    
     const id = nanoid();
@@ -41,16 +41,16 @@ export class App extends Component {
         alert(`The ${name} is already in contacts`);
     } else {
         
-      
-        this.setState({ contacts: [...this.state.contacts, {id: id, name: name, number: number }] });
+      this.setState({ contacts: [...this.state.contacts, {id: id, name: name, number: number }] });
        
     }
  
   }
 
-  getFilterValueOn = (element) => {
+  getFilterValueOn = () => {
     
-   return element.name.toLowerCase().includes(this.state.filter.toLowerCase());
+    return this.state.contacts.filter(element =>element.name.toLowerCase().includes(this.state.filter.toLowerCase()));
+    
   }
     
   render() {
@@ -72,12 +72,10 @@ export class App extends Component {
         <ContactForm  handleSubmit={this.handleSubmit} />
         <h2>Contacts</h2>
         <Filter handleFilter={this.handleFilter} filter={this.state.filter} />
-        <ul>
-        {this.state.contacts.map(element =>
-           this.getFilterValueOn(element) &&
-          < Contacts key={element.name} element={element} onDelete={this.handleDelete}
-           />)}
-        </ul>
+          <Contacts elements={this.getFilterValueOn()} onDelete={this.handleDelete} /> 
+        
+   
+       
         </>
       </div>
     );
